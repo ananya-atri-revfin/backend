@@ -9,6 +9,6 @@ export const typeOrmConfig: TypeOrmModule = {
     password: 'root',
     database: 'OTP',
     entities: [join(process.cwd(), 'dist/**/*.entity.js')],
-    synchronize: true,
-    dropSchema: true
+    // synchronize: true,
+    // dropSchema: true
 }

@@ -1,6 +1,6 @@
-// DECLARE DATABASE
+// DECLARE DATABASE AT LOGIN
 
-import { Entity, Column, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: "OTP" })
 export class OTP{
@@ -14,11 +14,14 @@ export class OTP{
   otp: string;
 
   @Column({ type: 'boolean', default: false })
-  verified: boolean;
+  isVerified: boolean;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
   createdAt: Date;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
   updatedAt: Date;
+
+  @Column({ type: 'integer', default: 1})
+  attempts: number;
 }

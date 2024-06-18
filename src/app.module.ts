@@ -1,25 +1,23 @@
 import { Module } from '@nestjs/common';
-
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-
-import { AuthController } from './data/data.controller';
-import { AuthModule } from './data/data.module';
-import { AuthService } from './data/data.service';
-
+import { DataModule } from './data/data.module';
 import { typeOrmConfig } from './config/typeorm.config';
-
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { OTP } from './data/data.entity';
-import { JwtService } from '@nestjs/jwt';
+import { OTP } from './data/entitites/data.entity';
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { Users } from './data/entitites/user.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig),
-    TypeOrmModule.forFeature([OTP]),
-    TypeOrmModule.forFeature([JwtService]),
-    AuthModule],
-  controllers: [AppController, AuthController],
-  providers: [AppService, AuthService],
+    TypeOrmModule.forFeature([OTP, Users]),
+    JwtModule,
+    DataModule,
+    PassportModule
+    ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
