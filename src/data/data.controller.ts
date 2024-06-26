@@ -18,6 +18,11 @@ export class DataController {
     return await this.dataService.verifyOtp(email, otp)
   }
 
+  @Get('get-user')
+  async getProfile(@Body('email') email:string){
+    return await this.dataService.getProfile(email)
+  }
+
   @Get('get-record')
   async getRecord(@Body('email') email: string) {
     const rec = await this.dataService.getRecord(email);

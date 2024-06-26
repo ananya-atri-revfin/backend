@@ -7,13 +7,13 @@ export class Users{
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar'})
+  @Column({ type: 'varchar', unique: true})
   email: string;
 
-  @Column({ type: 'varchar', default: "User"})
+  @Column({ type: 'varchar', default: "User123"})
   name: string;
 
-  @Column({ type: 'varchar', default: "none"})
+  @Column({ type: 'varchar', default: "Employee"})
   occupation: string;
 
   @Column({ type: 'boolean', default: false })
@@ -24,8 +24,6 @@ export class Users{
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
   updatedAt: Date;
-  
-  @Column({ type: 'varchar', default: null})
-  token: string;
+
 }
 
