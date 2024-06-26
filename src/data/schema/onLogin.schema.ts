@@ -4,8 +4,8 @@ import mongoose from "mongoose";
 @Schema()
 export class onLogin {
 
-    @Prop({ type: mongoose.Schema.Types.ObjectId })
-    id: number;
+    @Prop({type: mongoose.Schema.Types.Number})
+    _id: number;
 
     @Prop({ type: String, unique: true, required: true })
     email: string;
