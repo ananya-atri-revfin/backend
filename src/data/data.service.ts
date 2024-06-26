@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Model } from 'mongoose';
 import { onLogin } from './schema/onLogin.schema';
@@ -39,11 +39,7 @@ export class DataService {
         text: `Your OTP for login is: ${otp}`,
       }
       transporter.sendMail(mailOptions, (err, info) => {
-        if (err) { 
-          // throw new err.status(400).send({message: err.message})
-          // response.status(400).send({ message: error.message })
-          throw new HttpException("Unable to send Email, please try again later", HttpStatus.BAD_REQUEST); 
-        } // 400
+        if (err) { throw new HttpException("Unable to send Email, please try again later", HttpStatus.BAD_REQUEST); } // 400
         else { return info; }
       });
       if (!logUser) {
@@ -57,7 +53,6 @@ export class DataService {
         const now = new Date();
         if (logUser.attempts > 3 && ((Date.now() - logUser.updatedAt.getTime()) / 60000 < 5)) { 
           throw new HttpException("Maximum limit reached!", HttpStatus.NOT_ACCEPTABLE)
-          return { message: "Maximum limit reached" } 
         }
         else {
           logUser.updatedAt = now;
