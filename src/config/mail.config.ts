@@ -1,3 +1,5 @@
+// mail configurations
+
 export const nodeMailerConfig = {
   service: 'Gmail',
   host: 'smtp.gmail.com',
